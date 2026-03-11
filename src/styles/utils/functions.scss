@@ -1,0 +1,12 @@
+@use "sass:list";
+@use "variables";
+
+@function z($name) {
+  @if list.index(variables.$z-indexes, $name) {
+    @return (list.length(variables.$z-indexes) - list.index(variables.$z-indexes, $name)) + 1;
+  } @else {
+    @warn 'There is no item "#{$name}" in this list; Choose one of: #{variables.$z-indexes}';
+
+    @return null;
+  }
+}

@@ -1,0 +1,27 @@
+@use "../../utils/variables" as *;
+@use "../../shared/titles" as *;
+@use "../../shared/pages" as *;
+@use "../../shared/descriptions" as *;
+@use "../../utils/responsive" as *;
+
+.about {
+  @extend %page;
+
+  // background-color: $color-cadet-blue;
+  // color: $color-bright-gray;
+}
+.about__wrapper {
+}
+
+.about__title {
+  @extend %title-100;
+  text-align: center;
+  max-width: 126rem;
+  margin: auto;
+
+
+
+  @include media("<phone") {
+    max-width: 67.7rem;
+  }
+}

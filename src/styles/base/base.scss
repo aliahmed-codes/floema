@@ -1,0 +1,72 @@
+@use "../utils/variables" as *;
+
+@use "../utils/mixins" as *;
+@use "../utils/responsive" as *;
+
+@use "../shared/descriptions" as *;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  @extend %cover;
+
+  background-color: $color-contessa;
+  color: $color-quarter-spanish-white;
+  font-size: calc(100vw / 1920 * 10);
+  line-height: 1;
+  position: fixed;
+  overflow: hidden;
+
+  @include media("<phone") {
+    font-size: calc(100vw / 750 * 10);
+  }
+}
+
+body {
+  @extend %cover;
+  @extend %description-16;
+
+  font-family: $font-suisse-bp;
+  position: fixed;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+button {
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+img {
+  opacity: 0;
+  vertical-align: middle;
+  transition: opacity 0.4 ease;
+
+  &.loaded {
+    opacity: 1;
+  }
+}
+
+.content {
+  @extend %cover;
+}
+[data-animation="paragraph"],
+[data-animation="label"],
+[data-animation="title"] {
+  span {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+}

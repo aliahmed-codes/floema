@@ -1,0 +1,10 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false // make sure imports/exports are handled
+      }
+    ]
+  ]
+}
