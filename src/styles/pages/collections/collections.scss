@@ -14,6 +14,8 @@
 }
 .collections__wrapper {
   @extend %cover;
+
+  z-index: 1;
 }
 .collections__titles {
   @extend %vertical-titles;
@@ -84,7 +86,7 @@
   bottom: 5rem;
 
   @include media("<phone") {
-    display: flex; 
+    display: flex;
   }
 }
 .collections__mobile__item {

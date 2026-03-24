@@ -135,9 +135,11 @@ export default class Page {
             this.animationIn.fromTo(this.element,
                 {
                     autoAlpha: 0,
-                }, {
-                autoAlpha: 1,
-            })
+                },
+                {
+                    autoAlpha: 1,
+                }
+            )
 
             this.animationIn.call(_ => {
                 this.addEventListeners()

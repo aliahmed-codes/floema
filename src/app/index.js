@@ -65,10 +65,10 @@ class App {
   }
 
   onPopState() {
-    this.onChange(window.location.pathname)
+    this.onChange({ url: window.location.pathname, push: false })
   }
 
-  async onChange(url) {
+  async onChange({ url, push = true }) {
 
     await this.page.hide()
 
@@ -78,18 +78,24 @@ class App {
       const html = await request.text()
 
       const div = document.createElement('div')
+      if (push) {
+        window.history.pushState({}, '', url)
+      }
 
       div.innerHTML = html
 
       const divContent = div.querySelector('.content')
+
       this.template = divContent.getAttribute('data-template')
+
+      this.navigation.onChange(this.template)
+
       this.content.setAttribute('data-template', this.template)
       this.content.innerHTML = divContent.innerHTML
 
 
       this.page = this.pages[this.template]
 
-      this.navigation.onChange(this.template)
 
       this.page.create()
 
@@ -117,7 +123,7 @@ class App {
 
         const { href } = link
 
-        this.onChange(href)
+        this.onChange({ url: href })
 
       }
     })

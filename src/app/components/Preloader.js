@@ -38,6 +38,7 @@ export default class Preloader extends Component {
 
     createLoader() {
 
+        console.log("🚀 ", this.elements.images)
         each(this.elements.images, element => {
 
             element.src = element.getAttribute('data-src')
@@ -52,6 +53,7 @@ export default class Preloader extends Component {
         this.length += 1
 
         const percent = this.length / this.elements.images.length
+        console.log("🚀percent:", percent)
 
         this.elements.numberText.innerHTML = `${Math.round(percent * 100)}%`
 

@@ -1,15 +1,11 @@
 {
   "name": "folema",
   "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "Ali Ahmed",
-  "main": "index.js",
   "scripts": {
-    "frontend:build": "webpack",
-    "frontend:dev": "webpack server",
-    "backend:build": "node src/app.js",
-    "backend:dev": "nodemon src/app.js"
+    "build": "webpack",
+    "dev": "webpack server",
+    "backend:start": "node src/app.js",
+    "start": "nodemon src/app.js"
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
