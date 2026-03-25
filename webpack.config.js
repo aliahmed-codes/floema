@@ -26,9 +26,9 @@ module.exports = {
     },
 
     performance: {
-        maxEntrypointSize: 300000,
-        maxAssetSize: 300000,
-        hints: IS_DEV ? false : 'warning'
+        maxEntrypointSize: 500000,
+        maxAssetSize: 500000,
+        hints: IS_DEV ? false : 'warning',
     },
 
     resolve: {

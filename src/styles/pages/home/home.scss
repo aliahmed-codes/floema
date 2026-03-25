@@ -46,22 +46,137 @@
 .home__titles {
   @extend %vertical-titles;
 }
+
 .home__titles__label {
   @extend %vertical-titles__label;
 }
+
 .home__titles__title {
   @extend %vertical-titles__title;
 }
+
 .home__gallery {
   @extend %cover;
 
-  // visibility: hidden;
+  width: 241.8rem;
+  height: 172.5rem;
+  visibility: hidden;
 }
+
 .home__gallery__media {
   position: absolute;
+
+  &:nth-child(1) {
+    width: 27.83rem;
+    height: 41.824rem;
+    top: 16.4rem;
+    left: 9.4rem;
+  }
+
+  &:nth-child(2) {
+    width: 27.83rem;
+    height: 41.824rem;
+    left: 54.1rem;
+    top: 19.2rem;
+  }
+
+  &:nth-child(3) {
+    width: 27.83rem;
+    height: 41.424rem;
+    left: 106.3rem;
+    top: 10.7rem;
+  }
+
+  &:nth-child(4) {
+    width: 40.6rem;
+    height: 60.8rem;
+    left: 154.1rem;
+    top: 0;
+  }
+
+  &:nth-child(5) {
+    width: 27.883rem;
+    height: 41.824;
+    left: 207rem;
+    top: 10.7rem;
+  }
+
+  &:nth-child(6) {
+    width: 37.54rem;
+    height: 52.309rem;
+    left: 0;
+    top: 69.1rem;
+  }
+
+  &:nth-child(7) {
+    width: 40.6rem;
+    height: 60.8rem;
+    left: 46.7rem;
+    top: 66.2rem;
+  }
+
+  &:nth-child(8) {
+    width: 39.7rem;
+    height: 58.202rem;
+    left: 101.5rem;
+    top: 64.7rem;
+  }
+
+  &:nth-child(9) {
+    width: 27.883rem;
+    height: 41.824;
+    left: 160rem;
+    top: 63.8rem;
+  }
+
+  &:nth-child(10) {
+    width: 39.7rem;
+    height: 58.202rem;
+    left: 202.1rem;
+    top: 64.7rem;
+  }
+
+  &:nth-child(11) {
+    width: 27.883rem;
+    height: 41.424rem;
+    left: 13.1rem;
+    top: 128.9rem;
+  }
+
+  &:nth-child(12) {
+    width: 27.883rem;
+    height: 41.424rem;
+    left: 54.1rem;
+    top: 130.4rem;
+  }
+
+  &:nth-child(13) {
+    width: 27.883rem;
+    height: 41.424rem;
+    left: 105.7rem;
+    top: 128.6rem;
+  }
+
+  &:nth-child(14) {
+    width: 27.883rem;
+    height: 41.424rem;
+    left: 164.7rem;
+    top: 110.9rem;
+  }
+
+  &:nth-child(15) {
+    width: 27.883rem;
+    height: 41.424rem;
+    left: 206.3rem;
+    top: 128.6rem;
+  }
 }
+
 .home__gallery__media__image {
+  display: block;
+  width: 100%;
 }
+
 .home__link {
   @extend %description-14;
 

@@ -9,6 +9,7 @@
 *::after,
 *::before {
   box-sizing: border-box;
+  user-select: none;
 }
 
 html {
@@ -51,7 +52,7 @@ button {
 img {
   opacity: 0;
   vertical-align: middle;
-  transition: opacity 0.4 ease;
+  transition: opacity 0.4s ease;
 
   &.loaded {
     opacity: 1;

@@ -10,7 +10,7 @@ const methodOverride = require('method-override')
 
 const app = express()
 const path = require('path')
-const port = 3001
+const port = 3000
 
 
 app.use(logger('dev')) // Use the logger middleware to log requests in development mode
