@@ -4,7 +4,6 @@ import map from 'lodash/map'
 import GSAP from 'gsap'
 
 import Prefix from 'prefix'
-import NormalizeWheel from 'normalize-wheel';
 
 import Title from '../animations/Title';
 import Paragraph from '../animations/Paragraph';
@@ -28,9 +27,6 @@ export default class Page {
         };
 
         this.transformPrefix = Prefix('transform')
-
-
-        this.onMouseWheelEvent = this.onMouseWheel.bind(this)
 
     }
 
@@ -165,12 +161,7 @@ export default class Page {
     /** 
     * Events
     */
-    onMouseWheel(event) {
 
-        const { pixelY } = NormalizeWheel(event)
-
-        this.scroll.target += pixelY
-    }
 
     onResize() {
         if (this.elements.wrapper) {
@@ -180,6 +171,10 @@ export default class Page {
         each(this.animations, animation => animation.onResize())
     }
 
+
+    onMouse({ pixelY }) {
+        this.scroll.target += pixelY
+    }
 
     /**
      * Loops
@@ -208,11 +203,9 @@ export default class Page {
     * Listeners
     */
     addEventListeners() {
-        window.addEventListener('mousewheel', this.onMouseWheelEvent)
     }
 
     removeEventListeners() {
-        window.addEventListener('mousewheel', this.onMouseWheelEvent)
     }
 
 

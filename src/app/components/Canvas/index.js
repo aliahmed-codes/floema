@@ -30,7 +30,10 @@ export default class Canvas {
 
 
     createRenderer() {
-        this.renderer = new Renderer()
+        this.renderer = new Renderer({
+            alpha: true,
+            antialias: true
+        })
 
         this.gl = this.renderer.gl
 
@@ -134,6 +137,13 @@ export default class Canvas {
             })
         }
 
+    }
+
+
+    onWheel(event) {
+        if (this.home) {
+            this.home.onWheel(event)
+        }
     }
 
     /**
