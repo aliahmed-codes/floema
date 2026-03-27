@@ -78,8 +78,8 @@ export default class About {
   /**
    * Update
    */
-  update() {
-    map(this.galleries, (gallery) => gallery.update());
+  update(scroll) {
+    map(this.galleries, (gallery) => gallery.update(scroll));
   }
 
   /**
