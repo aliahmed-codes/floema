@@ -10,6 +10,7 @@ export default class About {
     this.group = new Transform();
     this.gl = gl;
     this.sizes = sizes;
+    this.scene = scene
 
     this.createGeometry();
     this.createGalleries();
@@ -86,5 +87,6 @@ export default class About {
  */
   destroy() {
     map(this.galleries, gallery => gallery.destroy())
+    this.scene.removeChild(this.group)
   }
 }

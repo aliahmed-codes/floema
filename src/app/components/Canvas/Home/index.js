@@ -14,7 +14,7 @@ export default class Home {
         this.sizes = sizes
         this.scene = scene
         this.galleryElements = document.querySelector('.home__gallery')
-        this.mediasElements = document.querySelectorAll('.home__gallery__media__image')
+        this.mediasElements = document.querySelectorAll('.home__gallery__media')
 
 
         this.x = {
@@ -204,7 +204,7 @@ export default class Home {
      */
 
     destroy() {
-        // this.scene.removeChild(this.group)
+        this.scene.removeChild(this.group)
     }
 
 }
