@@ -1,10 +1,14 @@
 import { Camera, Renderer, Transform } from "ogl"
+
 import Home from "./Home"
+import About from "./About"
 
 
 export default class Canvas {
 
-    constructor() {
+    constructor({ template }) {
+
+        this.template = template
 
         this.x = {
             start: 0,
@@ -24,10 +28,9 @@ export default class Canvas {
 
         this.onResize()
 
-        this.createHome()
+        this.onChangeEnd(this.template)
 
     }
-
 
     createRenderer() {
         this.renderer = new Renderer({
@@ -60,9 +63,54 @@ export default class Canvas {
         })
     }
 
+    destroyHome() {
+        if (!this.home) return
+        this.home.destroy()
+        this.home = null
+    }
+
+    createAbout() {
+        this.about = new About({
+            gl: this.gl,
+            scene: this.scene,
+            sizes: this.sizes
+        })
+    }
+
+    destroyAbout() {
+        if (!this.about) return
+
+        this.about.destroy()
+        this.about = null
+    }
+
+
     /**
      * Events
      */
+    onChangeStart() {
+        if (this.home) {
+            this.home.hide()
+        }
+
+        if (this.about) {
+            this.about.hide()
+        }
+    }
+
+    onChangeEnd(template) {
+        if (template == 'home') {
+            this.createHome()
+        } else {
+            this.destroyHome()
+        }
+
+        if (template == 'about') {
+            this.createAbout()
+        } else {
+            this.destroyAbout()
+        }
+    }
 
     onResize() {
         this.renderer.setSize(window.innerWidth, window.innerHeight)
@@ -80,10 +128,17 @@ export default class Canvas {
             width
         }
 
+        const values = {
+            sizes: this.sizes
+
+        }
+
         if (this.home) {
-            this.home.onResize({
-                sizes: this.sizes
-            })
+            this.home.onResize(values)
+        }
+
+        if (this.about) {
+            this.about.onResize(values)
         }
     }
 
@@ -93,12 +148,17 @@ export default class Canvas {
         this.x.start = event.touches ? event.touches[0].clientX : event.clientX
         this.y.start = event.touches ? event.touches[0].clientY : event.clientY
 
+        const values = {
+            x: this.x,
+            y: this.y
+        }
 
         if (this.home) {
-            this.home.onTouchDown({
-                x: this.x,
-                y: this.y
-            })
+            this.home.onTouchDown(values)
+        }
+
+        if (this.about) {
+            this.about.onTouchDown(values)
         }
 
     }
@@ -111,12 +171,17 @@ export default class Canvas {
         this.x.end = x
         this.y.end = y
 
+        const values = {
+            x: this.x,
+            y: this.y
+        }
 
         if (this.home) {
-            this.home.onTouchMove({
-                x: this.x,
-                y: this.y
-            })
+            this.home.onTouchMove(values)
+        }
+
+        if (this.about) {
+            this.about.onTouchMove(values)
         }
 
     }
@@ -130,11 +195,17 @@ export default class Canvas {
         this.x.end = x
         this.y.end = y
 
+        const values = {
+            x: this.x,
+            y: this.y
+        }
+
         if (this.home) {
-            this.home.onTouchUp({
-                x: this.x,
-                y: this.y
-            })
+            this.home.onTouchUp(values)
+        }
+
+        if (this.about) {
+            this.about.onTouchUp(values)
         }
 
     }
@@ -154,6 +225,10 @@ export default class Canvas {
 
         if (this.home) {
             this.home.update()
+        }
+
+        if (this.about) {
+            this.about.update()
         }
 
         this.renderer.render({

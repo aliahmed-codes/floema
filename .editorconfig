@@ -10,9 +10,9 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 
 [*.{js,jsx,ts,tsx}]
-indent_size = 3
+indent_size = 2
 
-[*.{html,pug,css,scss,json,yml,md}]
+[*.{html,pug,css,scss,json,yml,md}]P
 indent_size = 2
 
 [*.{py}]

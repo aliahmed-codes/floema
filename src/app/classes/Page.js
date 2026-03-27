@@ -199,6 +199,14 @@ export default class Page {
         }
     }
 
+    onWheel(normalized) {
+        const speed = normalized.pixelY
+
+        this.scroll.target += speed
+
+        return speed
+    }
+
     /**
     * Listeners
     */

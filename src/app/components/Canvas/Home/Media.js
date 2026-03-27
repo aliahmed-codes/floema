@@ -1,7 +1,7 @@
 import { Mesh, Program, Texture } from "ogl"
 
-import fragment from "../../shaders/plane-fragment.glsl"
-import vertex from "../../shaders/plane-vertex.glsl"
+import fragment from "../../../shaders/plane-fragment.glsl"
+import vertex from "../../../shaders/plane-vertex.glsl"
 import gsap from "gsap"
 
 export default class Media {
@@ -39,6 +39,9 @@ export default class Media {
             fragment,
             vertex,
             uniforms: {
+                uAlpha: {
+                    value: 0
+                },
                 tMap: {
                     value: this.texture
                 }
@@ -56,10 +59,6 @@ export default class Media {
 
         this.mesh.setParent(this.scene)
 
-        this.mesh.scale.x = 2
-
-        this.mesh.position.x += this.index * this.mesh.scale.x
-
         this.mesh.rotation.z = gsap.utils.random(-Math.PI * .03, Math.PI * .03)
 
     }
@@ -76,6 +75,23 @@ export default class Media {
     }
 
     /**
+     * Animations
+     */
+    show() {
+        gsap.fromTo(this.program.uniforms.uAlpha, {
+            value: 0
+        }, {
+            value: 1
+        })
+    }
+
+    hide() {
+        gsap.to(this.program.uniforms.uAlpha, {
+            value: 0
+        })
+    }
+
+    /**
     * Events
     */
 
@@ -84,10 +100,10 @@ export default class Media {
             x: 0,
             y: 0
         }
-        
+
         this.createBounds(sizes)
-        this.updateX(scroll ? scroll.x : 0)
-        this.updateY(scroll ? scroll.y : 0)
+        this.updateX(scroll && scroll.x)
+        this.updateY(scroll && scroll.y)
     }
 
     /**
