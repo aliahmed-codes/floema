@@ -1,10 +1,10 @@
-@use "../utils/mixins" as *;
 @use "../utils/functions" as *;
-@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
 @use "../utils/responsive" as *;
+@use "../utils/variables" as *;
 
-@use "../shared/titles" as *;
 @use "../shared/links" as *;
+@use "../shared/titles" as *;
 
 .navigation {
   @extend %cover;

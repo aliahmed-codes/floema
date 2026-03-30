@@ -72,12 +72,46 @@ const handleRequest = async (api) => {
     const { results: navigationData } = await api.getByType('navigation')
     const { results: metaData } = await api.getByType('metadata')
 
+    const { results: homeData } = await api.getByType('home')
+    const { results: aboutData } = await api.getByType('about')
+
+    const collections = await api.getAllByType('collection', { fetchLinks: 'product.image' })
+
+
 
     const [meta] = metaData
+    const [home] = homeData
+    const [about] = aboutData
     const [preloader] = preloaderData
     const [navigation] = navigationData
+
+    const assets = []
+
+    home.data.gallery.forEach(item => {
+        assets.push(item.image.url)
+    })
+
+    about.data.gallery.forEach(item => {
+        assets.push(item.image.url)
+    })
+
+    about.data.body.forEach(section => {
+        if (section.slice_type === "gallery") {
+            section.items.forEach(item => {
+                assets.push(item.image.url)
+            })
+        }
+    })
+
+
+    collections.forEach(collection => {
+        collection.data.products.forEach(item => {
+            assets.push(item.products_product.data.image.url)
+        })
+    })
+
     return {
-        meta, preloader, navigation
+        assets, about, collections, home, meta, navigation, preloader
     }
 
 }
@@ -85,22 +119,16 @@ const handleRequest = async (api) => {
 
 app.get('/', async (req, res) => {
     const api = initAPi()
-    const { results: homeData } = await api.getByType('home')
-    const collections = await api.getAllByType('collection', { fetchLinks: 'product.image' })
-    const [home] = homeData
-
     const defaults = await handleRequest(api)
-    res.render('pages/home', { ...defaults, home, collections })
+
+    res.render('pages/home', { ...defaults, })
 })
+
 app.get('/about', async (req, res) => {
     const api = initAPi()
-    const { results: aboutData } = await api.getByType('about')
-
-    const [about] = aboutData
     const defaults = await handleRequest(api)
 
-
-    res.render('pages/about', { ...defaults, about })
+    res.render('pages/about', { ...defaults, })
 })
 
 app.get('/detail/:uid', async (req, res) => {
@@ -109,26 +137,20 @@ app.get('/detail/:uid', async (req, res) => {
 
     const api = initAPi()
 
-    const { results: homeData } = await api.getByType('home')
     const product = await api.getByUID('product', uid, { fetchLinks: 'collection.title' })
 
-    const [home] = homeData
 
     const defaults = await handleRequest(api)
 
 
-    res.render('pages/detail', { ...defaults, home, product })
+    res.render('pages/detail', { ...defaults, product })
 })
+
 app.get('/collections', async (req, res) => {
     const api = initAPi()
-    const { results: homeData } = await api.getByType('home')
-    const collections = await api.getAllByType('collection', { fetchLinks: 'product.image' })
-
-    const [home] = homeData
-
     const defaults = await handleRequest(api)
 
-    res.render('pages/collections', { ...defaults, home, collections })
+    res.render('pages/collections', { ...defaults, })
 })
 
 

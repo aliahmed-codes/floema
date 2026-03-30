@@ -1,4 +1,5 @@
 @use "../utils/variables" as *;
+@use "../utils/functions" as *;
 
 @use "../utils/mixins" as *;
 @use "../utils/responsive" as *;
@@ -44,6 +45,7 @@ a {
 canvas {
   position: relative;
   pointer-events: none;
+  z-index: z("canvas");
 }
 
 button {
