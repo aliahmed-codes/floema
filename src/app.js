@@ -109,12 +109,15 @@ app.get('/detail/:uid', async (req, res) => {
 
     const api = initAPi()
 
+    const { results: homeData } = await api.getByType('home')
     const product = await api.getByUID('product', uid, { fetchLinks: 'collection.title' })
+
+    const [home] = homeData
 
     const defaults = await handleRequest(api)
 
 
-    res.render('pages/detail', { ...defaults, product })
+    res.render('pages/detail', { ...defaults, home, product })
 })
 app.get('/collections', async (req, res) => {
     const api = initAPi()

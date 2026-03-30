@@ -41,6 +41,11 @@ a {
   outline: none;
 }
 
+canvas {
+  position: relative;
+  pointer-events: none;
+}
+
 button {
   background: none;
   color: inherit;
