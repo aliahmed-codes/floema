@@ -23,6 +23,8 @@ class App {
     this.addEventListeners()
     this.addLinkListeners()
 
+    this.onResize()
+
     this.update()
 
   }
@@ -66,11 +68,9 @@ class App {
   * Events.
   */
   onPreloader() {
-    this.canvas.onPreloaded()
-
-    this.preloader.destroy()
-
     this.onResize()
+
+    this.canvas.onPreloaded()
 
     this.page.show()
   }

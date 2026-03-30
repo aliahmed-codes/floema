@@ -1,4 +1,3 @@
-import each from "lodash/each";
 import { Texture } from "ogl";
 
 import Component from "../classes/Component";
@@ -78,31 +77,36 @@ export default class Preloader extends Component {
 
     onLoaded() {
         return new Promise(resolve => {
+
+            this.emit('completed')
+
             this.animateOut = GSAP.timeline({
-                delay: 2
+                delay: 1
             })
+
             this.animateOut.to(this.elements.titleSpans, {
-                autoAlpha: 0,
-                stagger: 0.1,
                 duration: 1.5,
                 ease: "expo.out",
+                stagger: 0.1,
                 y: '100%',
             })
+
             this.animateOut.to(this.elements.numberText, {
-                autoAlpha: 0,
-                stagger: 0.1,
                 duration: 1.5,
                 ease: "expo.out",
+                stagger: 0.1,
                 y: '100%',
             }, '-=1.4')
+
+
+
             this.animateOut.to(this.element, {
-                scaleY: 0,
-                transformOrigin: '100% 100%',
-                duration: 1.5,
-                ease: "expo.out",
-            }, '-=1')
+                autoAlpha: 0,
+                duration: 1,
+            })
+
             this.animateOut.call(_ => {
-                this.emit('completed')
+                this.destroy()
             })
         })
     }

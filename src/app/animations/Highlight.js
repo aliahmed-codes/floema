@@ -1,44 +1,27 @@
-import GSAP from "gsap";
+import gsap from "gsap";
 import Animation from "../classes/Animation"
 
-export default class Paragraph extends Animation {
+export default class Highlight extends Animation {
     constructor({ element, elements }) {
-
         super({
             element,
-            elements: { ...elements }
+            elements: elements
         })
-
     }
 
-
     animateIn() {
-        if (this.isAnimatedIn) {
-            return
-        }
-
-        this.isAnimatedIn = true
-
-        this.timelineIn = GSAP.timeline({ delay: 0.5 })
-
-
-        this.timelineIn.fromTo(this.element, {
-            scale: 1.2,
-            autoAlpha: 0
+        gsap.fromTo(this.element, {
+            autoAlpha: 0,
+            delay: 0.5
         }, {
             autoAlpha: 1,
-            duration: 1.5,
-            scale: 1,
-            ease: 'expo.out'
+            duration: 1
         }, 0)
     }
 
     animateOut() {
-        this.isAnimatedIn = false
-
-        GSAP.set(this.element, { alpha: 0 })
+        gsap.set(this.element, {
+            autoAlpha: 0
+        })
     }
-
-
-
 } 
