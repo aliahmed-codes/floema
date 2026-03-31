@@ -91,6 +91,7 @@ class App {
       const html = await request.text()
 
       const div = document.createElement('div')
+
       if (push) {
         window.history.pushState({}, '', url)
       }
