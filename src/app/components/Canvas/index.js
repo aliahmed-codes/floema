@@ -4,7 +4,7 @@ import Home from "./Home"
 import About from "./About"
 import Collections from "./Collections"
 import Transition from "./Transition"
-import Detail from "../Detail"
+import Detail from "./Detail"
 import gsap from "gsap"
 
 
@@ -157,6 +157,10 @@ export default class Canvas {
 
         if (this.collections) {
             this.collections.hide()
+        }
+
+        if (this.detail) {
+            this.detail.hide()
         }
 
         this.isFromCollectionsToDetail = this.template === "collections" && url.indexOf('detail') > -1

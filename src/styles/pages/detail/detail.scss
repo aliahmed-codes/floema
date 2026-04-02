@@ -31,6 +31,7 @@
   height: 78.2rem;
   width: 55.4rem;
   position: relative;
+  visibility: hidden;
 
   @include media("<phone") {
     width: 100%;

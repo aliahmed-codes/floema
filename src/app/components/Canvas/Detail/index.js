@@ -1,7 +1,7 @@
 import { Mesh, Plane, Program } from "ogl"
 
-import fragment from "../../shaders/plane-fragment.glsl"
-import vertex from "../../shaders/plane-vertex.glsl"
+import fragment from "../../../shaders/plane-fragment.glsl"
+import vertex from "../../../shaders/plane-vertex.glsl"
 import gsap from "gsap"
 
 export default class Detail {
@@ -20,7 +20,9 @@ export default class Detail {
         this.createTexture()
         this.createProgram()
         this.createMesh()
-        this.createBounds({ sizes: this.sizes })
+        this.createBounds({
+            sizes: this.sizes
+        })
 
         this.show()
     }
@@ -54,6 +56,8 @@ export default class Detail {
             }
         )
 
+        this.mesh.rotation.z = Math.PI * 0.01
+
         this.mesh.setParent(this.scene)
     }
 
@@ -84,6 +88,9 @@ export default class Detail {
     }
 
     hide() {
+        gsap.to(this.program.uniforms.uAlpha, {
+            value: 0
+        })
     }
 
     /**

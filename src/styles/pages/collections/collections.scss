@@ -60,12 +60,14 @@
     margin-right: 0;
   }
 }
+
 .collections__gallery__media {
   width: 44.7rem;
   height: 63.1rem;
   position: relative;
   visibility: hidden;
 }
+
 .collections__gallery__media__image {
   @extend %cover;
 
