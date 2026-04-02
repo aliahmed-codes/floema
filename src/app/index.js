@@ -126,21 +126,7 @@ class App {
 
   }
 
-  addLinkListeners() {
 
-    const links = document.querySelectorAll('a')
-
-    each(links, link => {
-      link.onclick = event => {
-        event.preventDefault()
-
-        const { href } = link
-
-        this.onChange({ url: href })
-
-      }
-    })
-  }
   onResize() {
     if (this.page && this.page.onResize) {
       this.page.onResize()
@@ -216,6 +202,22 @@ class App {
     window.addEventListener('touchend', this.onTouchUp.bind(this))
 
     window.addEventListener('resize', this.onResize.bind(this))
+  }
+
+  addLinkListeners() {
+
+    const links = document.querySelectorAll('a')
+
+    each(links, link => {
+      link.onclick = event => {
+        event.preventDefault()
+
+        const { href } = link
+
+        this.onChange({ url: href })
+
+      }
+    })
   }
 
 }

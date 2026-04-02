@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const logger = require('morgan')
 const errorHandler = require('errorhandler')
 const methodOverride = require('method-override')
+const uaParser = require('ua-parser-js')
 
 
 const app = express()
@@ -46,10 +47,12 @@ const handleLinkResolver = (doc) => {
 
 
 app.use((req, res, next) => {
-    // res.locals.ctx = {
-    //     endpoint: process.env.PRISMIC_ENDPOINT,
-    //     linkResolver: handleLinkResolver
-    // }
+
+    const ua = uaParser(req.headers['user-agent'])
+
+    res.locals.isDesktop = ua.device.type === undefined
+    res.locals.isPhone = ua.device.type === 'mobile'
+    res.locals.isTablet = ua.device.type === 'tablet'
 
     res.locals.Link = handleLinkResolver
 
