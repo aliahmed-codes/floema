@@ -119,15 +119,19 @@ export default class Page {
     /** 
     * Animations
     */
-    show() {
+    show(animation) {
 
         colorManager.change({
             color: this.element.getAttribute('data-color'),
             backgroundColor: this.element.getAttribute('data-background')
         })
 
-        this.animationIn = GSAP.timeline()
-        return new Promise(resolve => {
+        if (animation) {
+            this.animationIn = animation
+
+        } else {
+            this.animationIn = GSAP.timeline()
+
             this.animationIn.fromTo(this.element,
                 {
                     autoAlpha: 0,
@@ -136,11 +140,10 @@ export default class Page {
                     autoAlpha: 1,
                 }
             )
+        }
 
-            this.animationIn.call(_ => {
-                this.addEventListeners()
-                resolve()
-            })
+        this.animationIn.call(_ => {
+            this.addEventListeners()
         })
     }
 

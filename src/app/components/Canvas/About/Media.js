@@ -14,15 +14,18 @@ export default class Media {
         this.index = index
         this.sizes = sizes
 
-        this.createTexture()
-        this.createProgram()
-        this.createMesh()
-
         this.extra = {
             x: 0,
             y: 0
         }
 
+        this.createTexture()
+        this.createProgram()
+        this.createMesh()
+
+        this.createBounds({
+            sizes: this.sizes
+        })
     }
 
     createTexture() {
@@ -119,18 +122,6 @@ export default class Media {
 
         this.mesh.scale.x = this.sizes.width * this.width
         this.mesh.scale.y = this.sizes.height * this.height
-
-
-        // const scale = gsap.utils.mapRange(
-        //     0,
-        //     this.sizes.width / 2,
-        //     .1,
-        //     0,
-        //     Math.abs(this.mesh.position.x)
-        // )
-
-        // this.mesh.scale.x += scale
-        // this.mesh.scale.y += scale
     }
 
 
@@ -149,8 +140,6 @@ export default class Media {
     }
 
     update(scroll) {
-        if (!this.bounds) return
-
         this.updateRotation()
         this.updateX(scroll)
         this.updateY(0)

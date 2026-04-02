@@ -7,12 +7,13 @@ import Media from "./Media"
 
 
 export default class Collections {
-    constructor({ gl, scene, sizes }) {
-
+    constructor({ gl, scene, sizes, transition }) {
+        this.id = "collections"
 
         this.gl = gl
         this.sizes = sizes
         this.scene = scene
+        this.transition = transition
 
         this.transformPrefix = Prefix('transform')
 
@@ -40,6 +41,10 @@ export default class Collections {
 
         this.createGeometry()
         this.createGallery()
+
+        this.onResize({
+            sizes: this.sizes
+        })
 
 
         this.group.setParent(scene)
@@ -70,6 +75,12 @@ export default class Collections {
   */
 
     show() {
+        if (this.transition) {
+            this.transition.animate(this.medias[0].mesh, _ => {
+
+            })
+        }
+
         map(this.medias, (media) => media.show());
     }
 
@@ -137,9 +148,6 @@ export default class Collections {
      * Update
      */
     update() {
-
-        if (!this.bounds) return
-
         this.scroll.target = gsap.utils.clamp(-this.scroll.limit, 0, this.scroll.target)
 
         this.scroll.current = gsap.utils.interpolate(this.scroll.current, this.scroll.target, this.scroll.lerp)
@@ -156,16 +164,17 @@ export default class Collections {
 
         this.scroll.last = this.scroll.current
 
-        map(this.medias, (media, index) => {
-            media.update(this.scroll.current)
-        })
-
         const index = Math.floor(Math.abs(this.scroll.current / this.scroll.limit) * this.medias.length)
-
 
         if (this.index !== index) {
             this.onChange(index)
         }
+
+        map(this.medias, (media, index) => {
+            media.update(this.scroll.current, this.index)
+
+            media.mesh.position.y += Math.cos((media.mesh.position.x / this.sizes.width) * Math.PI * 0.1) * 50 - 50
+        })
 
     }
 

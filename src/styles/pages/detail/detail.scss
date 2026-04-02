@@ -17,8 +17,8 @@
   }
 }
 .detail__wrapper {
-  display: flex;
-  align-items: center;
+  @extend %cover;
+  @extend %center;
 
   @include media("<phone") {
     display: block;
