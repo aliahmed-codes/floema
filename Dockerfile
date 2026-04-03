@@ -13,7 +13,8 @@ RUN apk add --no-cache \
     libpng-dev \
     libjpeg-turbo-dev \
     nasm \
-    zlib-dev
+    zlib-dev \
+    python3
 
 WORKDIR /app
 
@@ -32,11 +33,15 @@ FROM node:20-alpine
 
 WORKDIR /app
 
+# Copy package.json first
 COPY package.json ./
 
-# Install only production dependencies
-RUN npm install --omit=dev && \
-    npm install ua-parser-js dotenv
+# Copy ONLY production node_modules from builder
+COPY --from=builder /app/node_modules ./node_modules
+
+# Manually remove dev-only packages that aren't needed at runtime
+# (This avoids reinstalling and triggering gifsicle build)
+RUN npm prune --omit=dev --ignore-scripts || true
 
 # Copy server source and views
 COPY src/ ./src/
