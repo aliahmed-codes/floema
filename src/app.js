@@ -11,7 +11,7 @@ const uaParser = require('ua-parser-js')
 
 const app = express()
 const path = require('path')
-const port = 3000
+const port = process.env.PORT || 3000
 
 
 app.use(logger('dev')) // Use the logger middleware to log requests in development mode
