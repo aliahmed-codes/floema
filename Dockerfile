@@ -1,6 +1,20 @@
 # ── Stage 1: Build ────────────────────────────────────────────────────────────
 FROM node:20-alpine AS builder
 
+# Install build tools needed for native modules (gifsicle, etc.)
+RUN apk add --no-cache \
+    autoconf \
+    automake \
+    libtool \
+    make \
+    gcc \
+    g++ \
+    libc-dev \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    nasm \
+    zlib-dev
+
 WORKDIR /app
 
 COPY package.json ./
@@ -21,8 +35,6 @@ WORKDIR /app
 COPY package.json ./
 
 # Install only production dependencies
-# ua-parser-js and dotenv are used at runtime but listed under devDependencies,
-# so we install everything and prune what we can't avoid needing.
 RUN npm install --omit=dev && \
     npm install ua-parser-js dotenv
 
