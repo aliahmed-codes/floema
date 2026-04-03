@@ -61,7 +61,9 @@ module.exports = {
         new CleanWebpackPlugin(),
         // Removed HotModuleReplacementPlugin - not needed when hot: true is set
         new BundleAnalyzerPlugin({
-            openAnalyzer: false
+            analyzerMode: 'static',  // Generates report.html file instead of server
+            openAnalyzer: false,     // Don't open browser
+            reportFilename: 'bundle-report.html'  // Optional: custom filename
         }),
 
     ],
